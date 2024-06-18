@@ -1,3 +1,6 @@
-import { getAllProductsDescription } from "./module/product.js"
+import { 
+    getAllProductsDescription, 
+    getAllEmployeesToWorkInSanFrancisco
+} from "./module/product.js"
 
-console.log(await getAllProductsDescription)
+console.log( getAllEmployeesToWorkInSanFrancisco)
