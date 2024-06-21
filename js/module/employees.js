@@ -113,3 +113,20 @@ export const getTotalProductsSoldByEmployee = async () => {
 };
 
 //3.15 *Calcular el total de pagos recibidos por cada vendedor:**
+export const getTotalPaymentsByEmployee = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT e.employeeNumber, e.firstName, e.lastName, SUM(p.amount) AS totalPayments
+            FROM employees e
+            JOIN customers c ON e.employeeNumber = c.salesRepEmployeeNumber
+            JOIN payments p ON c.customerNumber = p.customerNumber
+            GROUP BY e.employeeNumber, e.firstName, e.lastName
+        `);
+        return rows;
+    } catch (error) {
+        console.error("Error al obtener el total de pagos por vendedor:", error);
+        throw error;
+    }
+};
+
+//3.16 *Obtener el promedio del límite de crédito de los clientes atendidos por cada vendedor:**

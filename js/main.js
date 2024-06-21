@@ -34,7 +34,8 @@ import {
     getEmployeeCountByJobTitle,
     getAverageSalesByEmployee,
     getTotalOrdersManagedByEmployee,
-    getTotalProductsSoldByEmployee
+    getTotalProductsSoldByEmployee,
+    getTotalPaymentsByEmployee
 } from "./module/employees.js"
 
 import {
@@ -63,4 +64,4 @@ import {
 
 } from "./module/ordendetails.js"
 
-console.log(await getTotalProductsSoldByEmployee())
+console.log(await getTotalPaymentsByEmployee())
