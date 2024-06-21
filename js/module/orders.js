@@ -21,3 +21,19 @@ export const getAllOrdersFromFrance = async () => {
         throw error;
     }
   };
+
+//3.3 *Calcular el total de órdenes realizadas por cada cliente:**
+export const getTotalOrdersByCustomer = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT o.customerNumber, c.customerName, COUNT(o.orderNumber) AS totalOrders
+            FROM orders o
+            JOIN customers c ON o.customerNumber = c.customerNumber
+            GROUP BY o.customerNumber
+        `);
+        return rows;
+    } catch (error) {
+        console.error("Error al obtener el total de órdenes por cliente:", error);
+        throw error;
+    }
+};

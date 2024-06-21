@@ -55,6 +55,34 @@ export const getAverageBuyPriceByProduct = async () => {
   }
 };
 
+//2.8 *Encontrar el precio total de todos los productos:**
+export const getTotalProductPrice = async () => {
+  try {
+      const [rows] = await connection.query(`
+          SELECT SUM(buyPrice) AS totalPrice
+          FROM products
+      `);
+      return rows[0].totalPrice; // Devolver el valor directamente
+  } catch (error) {
+      console.error("Error al obtener el precio total de los productos:", error);
+      throw error;
+  }
+};
+//2.9 *Calcular el promedio del precio sugerido (MSRP) de los productos:**
+export const getAverageMSRP = async () => {
+  try {
+      const [rows] = await connection.query(`
+          SELECT AVG(MSRP) AS averageMSRP
+          FROM products
+      `);
+      return rows[0].averageMSRP; // Devolver el valor directamente
+  } catch (error) {
+      console.error("Error al obtener el promedio del MSRP:", error);
+      throw error;
+  }
+};
+
+//3.6 *Obtener el promedio de la cantidad de productos en stock por línea de productos:**
 
 
 

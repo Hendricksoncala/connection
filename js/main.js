@@ -3,6 +3,8 @@ import {
     getAllProductsWithLineDescriptions,
     getProductStockByLine,
     getAverageBuyPriceByProduct,
+    getTotalProductPrice,
+    getAverageMSRP
 } from "./module/product.js"
 
 import {
@@ -10,7 +12,11 @@ import {
 
     getOrderDetailsByCustomer,
     getCustomersFromUSAWithHighCreditLimit,
-    getAverageCreditLimit
+    getAverageCreditLimit,
+    getTotalPaymentsByTheCustomer,
+    getAverageCreditLimitByCountry,
+    getTotalSalesByCustomer
+
 } from "./module/customers.js"
 
 import {
@@ -18,13 +24,15 @@ import {
 
     getAllEmployeesToWorkInSanFrancisco,
     getEmployeesReportingTo,
-    getTotalEmployees
+    getTotalEmployees,
+    getEmployeeCountByJobTitle
 } from "./module/employees.js"
 
 import {
 
     getAllShippedOrders,
-    getAllOrdersFromFrance
+    getAllOrdersFromFrance,
+    getTotalOrdersByCustomer
 } from "./module/orders.js"
 
 import {
@@ -41,6 +49,9 @@ import {
 } from "./module/offices.js"
 
 import {
-    getAverageQuantityOrderedByProduct
+    getAverageQuantityOrderedByProduct,
+    getTotalProductsOrderedByCustomer
+
 } from "./module/ordendetails.js"
-console.log(await getAverageQuantityOrderedByProduct())
+
+console.log(await getTotalSalesByCustomer())

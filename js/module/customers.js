@@ -47,3 +47,51 @@ export const getAverageCreditLimit = async () => {
         throw error;
     }
 };
+
+//3.1 *Calcular el total de pagos recibidos por cada cliente:
+export const getTotalPaymentsByTheCustomer = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT c.customerName, SUM(p.amount) AS totalPayments
+            FROM customers c
+            JOIN payments p ON c.customerNumber = p.customerNumber
+            GROUP BY c.customerNumber
+        `);
+        return rows;
+    } catch (error) {
+        console.error("Error al obtener los pagos totales por cliente:", error);
+        throw error;
+    }
+};
+
+//3.2 *Obtener el promedio del límite de crédito de los clientes por país:**
+export const getAverageCreditLimitByCountry = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT country, AVG(creditLimit) AS averageCreditLimit
+            FROM customers
+            GROUP BY country
+        `);
+        return rows;
+    } catch (error) {
+        console.error("Error al obtener el promedio del límite de crédito por país:", error);
+        throw error;
+    }
+};
+
+//3.5 *Calcular el total de ventas (cantidad ordenada por precio cada uno) por cada cliente:**
+export const getTotalSalesByCustomer = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT c.customerName, SUM(od.quantityOrdered * od.priceEach) AS totalSales
+            FROM customers c
+            JOIN orders o ON c.customerNumber = o.customerNumber
+            JOIN orderdetails od ON o.orderNumber = od.orderNumber
+            GROUP BY c.customerName
+        `);
+        return rows;
+    } catch (error) {
+        console.error("Error al obtener el total de ventas por cliente:", error);
+        throw error;
+    }
+};

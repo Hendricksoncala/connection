@@ -36,3 +36,18 @@ export const getEmployeesReportingTo = async (reportsTo) => {
         throw error;
     }
 };
+
+//2.10 *Contar la cantidad de empleados por título de trabajo:**
+export const getEmployeeCountByJobTitle = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT jobTitle, COUNT(*) AS numberOfEmployees
+            FROM employees
+            GROUP BY jobTitle
+        `);
+        return rows;
+    } catch (error) {
+        console.error("Error al obtener el número de empleados por título de trabajo:", error);
+        throw error;
+    }
+};
