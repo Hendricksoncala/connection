@@ -17,7 +17,8 @@ import {
 
 
     getAllEmployeesToWorkInSanFrancisco,
-    getEmployeesReportingTo
+    getEmployeesReportingTo,
+    getTotalEmployees
 } from "./module/employees.js"
 
 import {
@@ -29,7 +30,17 @@ import {
 import {
 
     getAllPaymentsByCustomer,
-    getTotalPaymentsByCustomer
+    getTotalPaymentsByCustomer,
+    getTotalPayments,
 } from "./module/payments.js"
 
-console.log(await getAverageBuyPriceByProduct())
+import {
+
+    getOfficeCountByCountry,
+
+} from "./module/offices.js"
+
+import {
+    getAverageQuantityOrderedByProduct
+} from "./module/ordendetails.js"
+console.log(await getAverageQuantityOrderedByProduct())

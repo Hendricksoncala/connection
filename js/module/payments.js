@@ -30,3 +30,16 @@ export const getTotalPaymentsByCustomer = async () => {
     }
   };
   
+//2.5 *Calcular el total de pagos recibidos:**
+  export const getTotalPayments = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT FORMAT(SUM(amount), 2) AS totalPayments
+            FROM payments
+        `);
+        return rows[0].totalPayments; // Devolver el valor formateado directamente
+    } catch (error) {
+        console.error("Error al obtener el total de pagos:", error);
+        throw error;
+    }
+};

@@ -22,3 +22,17 @@ export const getEmployeesReportingTo = async (reportsTo) => {
       throw error; 
     }
   };
+
+  //2.6 Obtener la cantidad total de empleados:**
+  export const getTotalEmployees = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT COUNT(*) AS totalEmployees
+            FROM employees
+        `);
+        return rows[0].totalEmployees; // Devolver el valor directamente
+    } catch (error) {
+        console.error("Error al obtener el total de empleados:", error);
+        throw error;
+    }
+};
