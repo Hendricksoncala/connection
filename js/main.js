@@ -35,7 +35,8 @@ import {
     getAverageSalesByEmployee,
     getTotalOrdersManagedByEmployee,
     getTotalProductsSoldByEmployee,
-    getTotalPaymentsByEmployee
+    getTotalPaymentsByEmployee,
+    getAverageCreditLimitByEmployee
 } from "./module/employees.js"
 
 import {
@@ -64,4 +65,4 @@ import {
 
 } from "./module/ordendetails.js"
 
-console.log(await getTotalPaymentsByEmployee())
+console.log(await getAverageCreditLimitByEmployee())

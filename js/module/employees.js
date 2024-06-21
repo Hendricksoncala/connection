@@ -130,3 +130,17 @@ export const getTotalPaymentsByEmployee = async () => {
 };
 
 //3.16 *Obtener el promedio del límite de crédito de los clientes atendidos por cada vendedor:**
+export const getAverageCreditLimitByEmployee = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT e.employeeNumber, e.firstName, e.lastName, AVG(c.creditLimit) AS averageCreditLimit
+            FROM employees e
+            JOIN customers c ON e.employeeNumber = c.salesRepEmployeeNumber
+            GROUP BY e.employeeNumber, e.firstName, e.lastName
+        `);
+        return rows;
+    } catch (error) {
+        console.error("Error al obtener el promedio del límite de crédito por vendedor:", error);
+        throw error;
+    }
+};
