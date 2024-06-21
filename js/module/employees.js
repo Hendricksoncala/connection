@@ -51,3 +51,65 @@ export const getEmployeeCountByJobTitle = async () => {
         throw error;
     }
 };
+
+//3.8 FALTA ARREGLAR *Encontrar el promedio de ventas (cantidad ordenada por precio cada uno) por cada empleado:**
+export const getAverageSalesByEmployee = async () => {
+    try {
+        const [rows] = await connection.query(`
+        SELECT e.employeeNumber, e.firstName, e.lastName, AVG(total_sales) AS avg_sales 
+        FROM (
+          SELECT e.employeeNumber, e.firstName, e.lastName, o.orderNumber, SUM(od.quantityOrdered * od.priceEach) AS total_sales
+          FROM employees e
+          JOIN customers c ON e.employeeNumber = c.salesRepEmployeeNumber
+          JOIN orders o ON c.customerNumber = o.customerNumber
+          JOIN orderdetails od ON o.orderNumber = od.orderNumber
+          WHERE o.status = 'Shipped'
+          GROUP BY e.employeeNumber, e.firstName, e.lastName, o.orderNumber
+        ) AS employee_sales
+        GROUP BY employeeNumber, firstName, lastName;
+        `);
+        return rows;
+    } catch (error) {
+        console.error("Error al obtener el promedio de ventas por empleado:", error);
+        throw error;
+    }
+};
+
+//3.9 *Calcular el total de órdenes gestionadas por cada empleado:**
+export const getTotalOrdersManagedByEmployee = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT e.employeeNumber, e.firstName, e.lastName, COUNT(o.orderNumber) AS totalOrders
+            FROM employees e
+            JOIN customers c ON e.employeeNumber = c.salesRepEmployeeNumber
+            JOIN orders o ON c.customerNumber = o.customerNumber
+            WHERE o.status = 'Shipped'
+            GROUP BY e.employeeNumber, e.firstName, e.lastName
+        `);
+        return rows;
+    } catch (error) {
+        console.error("Error al obtener el total de órdenes gestionadas por empleado:", error);
+        throw error;
+    }
+};
+
+//3.14 *Encontrar la cantidad total de productos vendidos por cada vendedor:**
+export const getTotalProductsSoldByEmployee = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT e.employeeNumber, e.firstName, e.lastName, SUM(od.quantityOrdered) AS totalProductsSold
+            FROM employees e
+            JOIN customers c ON e.employeeNumber = c.salesRepEmployeeNumber
+            JOIN orders o ON c.customerNumber = o.customerNumber
+            JOIN orderdetails od ON o.orderNumber = od.orderNumber
+            WHERE o.status = 'Shipped'
+            GROUP BY e.employeeNumber, e.firstName, e.lastName
+        `);
+        return rows;
+    } catch (error) {
+        console.error("Error al obtener la cantidad total de productos vendidos por empleado:", error);
+        throw error;
+    }
+};
+
+//3.15 *Calcular el total de pagos recibidos por cada vendedor:**

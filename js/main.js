@@ -4,7 +4,10 @@ import {
     getProductStockByLine,
     getAverageBuyPriceByProduct,
     getTotalProductPrice,
-    getAverageMSRP
+    getAverageMSRP,
+    getAverageStockByProductLine,
+    getTotalProductsSoldByProductLine,
+    getAverageBuyPriceByProductLine
 } from "./module/product.js"
 
 import {
@@ -15,7 +18,10 @@ import {
     getAverageCreditLimit,
     getTotalPaymentsByTheCustomer,
     getAverageCreditLimitByCountry,
-    getTotalSalesByCustomer
+    getTotalSalesByCustomer,
+    getTotalPaymentsByCountry,
+    getAverageQuantityOrderedByCustomer,
+    getTotalSalesByCountry
 
 } from "./module/customers.js"
 
@@ -25,7 +31,10 @@ import {
     getAllEmployeesToWorkInSanFrancisco,
     getEmployeesReportingTo,
     getTotalEmployees,
-    getEmployeeCountByJobTitle
+    getEmployeeCountByJobTitle,
+    getAverageSalesByEmployee,
+    getTotalOrdersManagedByEmployee,
+    getTotalProductsSoldByEmployee
 } from "./module/employees.js"
 
 import {
@@ -54,4 +63,4 @@ import {
 
 } from "./module/ordendetails.js"
 
-console.log(await getTotalSalesByCustomer())
+console.log(await getTotalProductsSoldByEmployee())

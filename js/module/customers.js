@@ -95,3 +95,54 @@ export const getTotalSalesByCustomer = async () => {
         throw error;
     }
 };
+
+//3.7 *Calcular el total de pagos recibidos por cada país:**
+export const getTotalPaymentsByCountry = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT c.country, SUM(p.amount) AS totalPayments
+            FROM customers c
+            JOIN payments p ON c.customerNumber = p.customerNumber
+            GROUP BY c.country
+        `);
+        return rows;
+    } catch (error) {
+        console.error("Error al obtener los pagos totales por país:", error);
+        throw error;
+    }
+};
+
+//3.11 *Encontrar el promedio de la cantidad de productos ordenados por cada cliente:**
+export const getAverageQuantityOrderedByCustomer = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT c.customerNumber, c.customerName, AVG(od.quantityOrdered) AS averageQuantityOrdered
+            FROM customers c
+            JOIN orders o ON c.customerNumber = o.customerNumber
+            JOIN orderdetails od ON o.orderNumber = od.orderNumber
+            GROUP BY c.customerNumber, c.customerName
+        `);
+        return rows;
+    } catch (error) {
+        console.error("Error al obtener el promedio de cantidad de productos ordenados por cliente:", error);
+        throw error;
+    }
+};
+
+//3.12 *Calcular el total de ventas realizadas en cada país:**
+export const getTotalSalesByCountry = async () => {
+    try {
+        const [rows] = await connection.query(`
+            SELECT c.country, SUM(od.quantityOrdered * od.priceEach) AS totalSales
+            FROM customers c
+            JOIN orders o ON c.customerNumber = o.customerNumber
+            JOIN orderdetails od ON o.orderNumber = od.orderNumber
+            WHERE o.status = 'Shipped'
+            GROUP BY c.country
+        `);
+        return rows;
+    } catch (error) {
+        console.error("Error al obtener el total de ventas por país:", error);
+        throw error;
+    }
+};

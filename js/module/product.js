@@ -83,6 +83,48 @@ export const getAverageMSRP = async () => {
 };
 
 //3.6 *Obtener el promedio de la cantidad de productos en stock por línea de productos:**
+export const getAverageStockByProductLine = async () => {
+  try {
+      const [rows] = await connection.query(`
+          SELECT p.productLine, AVG(p.quantityInStock) AS averageStock
+          FROM products p
+          JOIN productlines pl ON p.productLine = pl.productLine
+          GROUP BY p.productLine
+      `);
+      return rows;
+  } catch (error) {
+      console.error("Error al obtener el promedio de stock por línea de productos:", error);
+      throw error;
+  }
+};
 
+//3.10 *Obtener la cantidad total de productos vendidos por cada línea de productos:**
+export const getTotalProductsSoldByProductLine = async () => {
+  try {
+      const [rows] = await connection.query(`
+          SELECT p.productLine, SUM(od.quantityOrdered) AS totalProductsSold
+          FROM products p
+          JOIN orderdetails od ON p.productCode = od.productCode
+          GROUP BY p.productLine
+      `);
+      return rows;
+  } catch (error) {
+      console.error("Error al obtener la cantidad total de productos vendidos por línea de productos:", error);
+      throw error;
+  }
+};
 
-
+//3.13 *Obtener el promedio del precio de compra de los productos por línea de productos:**
+export const getAverageBuyPriceByProductLine = async () => {
+  try {
+      const [rows] = await connection.query(`
+          SELECT productLine, AVG(buyPrice) AS averageBuyPrice
+          FROM products
+          GROUP BY productLine
+      `);
+      return rows;
+  } catch (error) {
+      console.error("Error al obtener el precio promedio de compra por línea de productos:", error);
+      throw error;
+  }
+};
