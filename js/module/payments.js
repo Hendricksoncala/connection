@@ -43,3 +43,5 @@ export const getTotalPaymentsByCustomer = async () => {
         throw error;
     }
 };
+
+//3.19 *Obtener el total de pagos realizados en cada año:**

@@ -128,3 +128,19 @@ export const getAverageBuyPriceByProductLine = async () => {
       throw error;
   }
 };
+
+//3.20 *Encontrar el promedio del precio de venta (priceEach) de los productos por línea de productos:**
+export const getAverageSalePriceByProductLine = async (connection) => {
+  try {
+    const [rows] = await connection.query(`
+      SELECT p.productLine, AVG(od.priceEach) AS average_sale_price 
+      FROM products p 
+      JOIN orderdetails od ON p.productCode = od.productCode 
+      GROUP BY p.productLine;
+    `);
+    return rows;
+  } catch (error) {
+    console.error("Error al obtener el precio de venta promedio por línea de productos:", error);
+    throw error;
+  }
+};

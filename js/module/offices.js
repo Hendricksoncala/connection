@@ -14,3 +14,5 @@ export const getOfficeCountByCountry = async () => {
         throw error;
     }
 };
+
+//3.17 *Encontrar el total de ventas realizadas por cada oficina:**

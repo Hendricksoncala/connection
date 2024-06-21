@@ -146,3 +146,5 @@ export const getTotalSalesByCountry = async () => {
         throw error;
     }
 };
+
+//3.18  *Calcular la cantidad media de productos pedidos por cada cliente:**

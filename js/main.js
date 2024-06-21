@@ -7,7 +7,8 @@ import {
     getAverageMSRP,
     getAverageStockByProductLine,
     getTotalProductsSoldByProductLine,
-    getAverageBuyPriceByProductLine
+    getAverageBuyPriceByProductLine,
+    getAverageSalePriceByProductLine
 } from "./module/product.js"
 
 import {
@@ -21,7 +22,8 @@ import {
     getTotalSalesByCustomer,
     getTotalPaymentsByCountry,
     getAverageQuantityOrderedByCustomer,
-    getTotalSalesByCountry
+    getTotalSalesByCountry,
+    getAverageQuantityOrderedPerCustomer
 
 } from "./module/customers.js"
 
@@ -51,6 +53,7 @@ import {
     getAllPaymentsByCustomer,
     getTotalPaymentsByCustomer,
     getTotalPayments,
+    getTotalPaymentsByYear
 } from "./module/payments.js"
 
 import {
@@ -65,4 +68,4 @@ import {
 
 } from "./module/ordendetails.js"
 
-console.log(await getAverageCreditLimitByEmployee())
+console.log(await getAverageSalePriceByProductLine())
