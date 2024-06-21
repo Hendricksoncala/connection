@@ -7,5 +7,5 @@ import mysql from 'mysql2/promise';
         port: 48029,
         password: "NsswzXBzwCLFOdwxgDPxClOIDkHTBYOk"
       });
-    console.log("conexion de date de datos OK", connection);    
+    console.log("conexion de date de datos OK");    
 
