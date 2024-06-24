@@ -338,9 +338,7 @@ JOIN productlines pl ON p.productLine = pl.productLine
 GROUP BY p.productLine;
 ```
 
-```
-   
-   ```
+
 
 7.✅
 
@@ -353,13 +351,11 @@ JOIN payments p ON c.customerNumber = p.customerNumber
 GROUP BY c.country;
 ```
 
-```
-   
-   ```
+
 
 8.
 
-- *Encontrar el promedio de ventas (cantidad ordenada por precio cada uno) por cada empleado:** FALTA ARREGLAR************************************************************
+- *Encontrar el promedio de ventas (cantidad ordenada por precio cada uno) por cada empleado:** FALTA 
 
 ```sql
 SELECT employeeNumber, firstName, lastName, AVG(total_sales) AS avg_sales
@@ -376,9 +372,7 @@ GROUP BY employeeNumber, firstName, lastName;
 
 ```
 
-```
-   
-   ```
+
 
 9.✅
 
@@ -394,9 +388,7 @@ GROUP BY e.employeeNumber, e.firstName, e.lastName;
 
 ```
 
-```
-   
-   ```
+
 
 10.✅
 
@@ -410,10 +402,6 @@ JOIN orderdetails od ON p.productCode = od.productCode
 GROUP BY p.productLine; 
 ```
 
-```
-    
-    ```
-
 11.✅
 
 - *Encontrar el promedio de la cantidad de productos ordenados por cada cliente:**
@@ -426,9 +414,8 @@ JOIN orderdetails od ON o.orderNumber = od.orderNumber
 GROUP BY c.customerNumber, c.customerName;
 ```
 
-```
     
-    ```
+
 
 12.✅
 
@@ -444,9 +431,7 @@ GROUP BY c.country;
 
 ```
 
-```
-    
-    ```
+
 
 13.✅
 
@@ -458,9 +443,7 @@ FROM products
 GROUP BY productLine; 
 ```
 
-```
-    
-    ```
+
 
 14.✅
 
@@ -476,9 +459,7 @@ WHERE o.status = 'Shipped'
 GROUP BY e.employeeNumber, e.firstName, e.lastName;
 ```
 
-```
-    
-    ```
+
 
 15.✅
 
@@ -492,9 +473,7 @@ JOIN payments p ON c.customerNumber = p.customerNumber
 GROUP BY e.employeeNumber, e.firstName, e.lastName;
 ```
 
-```
-    
-    ```
+
 
 16.✅
 
@@ -507,9 +486,7 @@ JOIN customers c ON e.employeeNumber = c.salesRepEmployeeNumber
 GROUP BY e.employeeNumber, e.firstName, e.lastName;
 ```
 
-```
-    
-    ```
+
 
 17. no sirve
 
@@ -525,9 +502,6 @@ WHERE ord.status = 'Shipped'
 GROUP BY o.officeCode;
 ```
 
-```
-    
-    ```
 
 18. no sirve en customers
 
@@ -542,9 +516,7 @@ WHERE o.status = 'Shipped'
 GROUP BY c.customerNumber, c.customerName;
 ```
 
-```
-    
-    ```
+
 
 19. no sirve en payments
 
@@ -556,9 +528,7 @@ FROM payments
 GROUP BY YEAR(paymentDate);
 ```
 
-```
-    
-    ```
+
 
 20. no sirve esta en products
 
@@ -571,4 +541,3 @@ JOIN orderdetails od ON p.productCode = od.productCode
 GROUP BY p.productLine;
 ```
 
-```
